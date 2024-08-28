@@ -24,5 +24,5 @@ python start.py
 
 ![pic](docs/img/image_1.jpg)
 
-+ **✨[感谢 Claire 同学](https://space.bilibili.com/14888344?spm_id_from=333.1007.0.0) -> 提供美术支持✨**
++ **✨感谢 [Claire](https://space.bilibili.com/14888344?spm_id_from=333.1007.0.0) 同学 -> 提供美术支持✨**
 + **✨感谢 `Intel` 官方 -> 提供技术支持✨**
