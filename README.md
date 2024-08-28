@@ -12,6 +12,12 @@
 
 ## Quick Start
 
+### 下载模型权重
+
+请将模型权重下载到 `models` 文件夹下，即 `models/Savant4RedT-1_8B-Content`。
+
+模型权重链接为 [Link](https://www.modelscope.cn/models/SaaRaaS/Savant4RedT-1_8B-Content) 。
+
 ### 安装依赖
 
 所用 python 版本为 3.11。
