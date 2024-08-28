@@ -12,6 +12,23 @@
 
 ## Quick Start
 
+### 安装依赖
+
+所用 python 版本为 3.11。
+
+```bash
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu
+pip install ipex-llm==2.1.0b20240805
+pip install transformers==4.37.0
+pip install accelerate==0.33.0
+pip install streamlit==1.38.0
+pip install einops==0.8.0
+pip install sentencepiece==0.2.0
+pip install py-cpuinfo==9.0.0
+```
+
+### 网页体验
+
 对于网页体验 `Demo`，可以尝试执行 `python` 文件 `start.py`
 
 ```bash

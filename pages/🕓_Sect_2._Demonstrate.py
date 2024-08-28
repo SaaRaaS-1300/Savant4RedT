@@ -44,7 +44,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-MODEL_PATH = "/home/merged/internlm2-chat-1_8b"
+MODEL_PATH = "models/Savant4RedT-1_8B-Content"
 USER_AVATAR = 'resource/pic_user.png'
 ROBOT_AVATAR = 'resource/pic_bot.png'
 logger = logging.get_logger(__name__)
