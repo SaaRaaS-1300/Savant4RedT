@@ -51,8 +51,7 @@ Input = f"""请你分析以下内容:
 ```json
 [
     {
-        "messages": 
-        [
+        "messages": [
             {
                 "role": "system",
                 "content": "你是 AI 信息内容安全专家"
@@ -68,5 +67,4 @@ Input = f"""请你分析以下内容:
         ]
     },
 ]
-
 ```
