@@ -25,3 +25,4 @@ python start.py
 ![pic](docs/img/image_1.jpg)
 
 + **✨[感谢 Claire 同学](https://space.bilibili.com/14888344?spm_id_from=333.1007.0.0) -> 提供美术支持✨**
++ **感谢 `Intel` 提供的相关支持**
