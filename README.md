@@ -47,11 +47,9 @@ python start.py
 
 对于其他细节内容，请访问 `quick_start.md` 文件，其链接为 [Link](docs/quick_start.md)
 
-## Acknowledgement
-
 ![pic](docs/img/image_1.png)
 
----
+## Acknowledgement
 
 ### 🏆 荣誉墙
 
