@@ -170,7 +170,7 @@ def generate_interactive(
         else:
             next_tokens = torch.argmax(probs, dim=-1)
 
-        # update generated ids, model inputs, and length for next step
+        # update generated ids, models inputs, and length for next step
         input_ids = torch.cat([input_ids, next_tokens[:, None]], dim=-1)
         model_kwargs = model._update_model_kwargs_for_generation(
             outputs, model_kwargs, is_encoder_decoder=False)
@@ -262,9 +262,9 @@ def generate_markdown():
 
 
 def main():
-    print('load model begin.')
+    print('load models begin.')
     model, tokenizer = load_model()
-    print('load model end.')
+    print('load models end.')
 
     st.title('🛡️ Savant4RedT && 内容安全测试')
     image_logo = Image.open('resource/pic_usage_3.png')

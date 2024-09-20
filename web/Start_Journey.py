@@ -16,11 +16,11 @@ def create_the_taskbot():
         page_title="Homepage for Proj",  # 设置网页标题
         page_icon="🌻"
     )
-    with open("resource/styles.css", encoding="UTF-8") as f:
+    with open("../resource/styles.css", encoding="UTF-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    with open("resource/markdown_txt_begin_1.md", encoding="UTF-8") as f:
+    with open("../resource/markdown_txt_begin_1.md", encoding="UTF-8") as f:
         markdown_txt_begin_1 = f.read()
-    image = Image.open('resource/pic_usage_1.png')
+    image = Image.open('../resource/pic_usage_1.png')
 
     # outlook - main
     st.title("🌠 Savant4RedT ⌈内容安全⌋ Expert")
@@ -40,7 +40,7 @@ def create_the_taskbot():
             unsafe_allow_html=True
         )
     # sidebar logo
-    image_logo = Image.open('resource/pic_usage_3.png')
+    image_logo = Image.open('../resource/pic_usage_3.png')
     st.sidebar.image(
         image_logo,
         use_column_width=True
@@ -48,8 +48,8 @@ def create_the_taskbot():
 
 
 if __name__ == "__main__":
-    # Load the model and tokenizer
-    # model, tokenizer = load_the_model(
+    # Load the models and tokenizer
+    # models, tokenizer = load_the_model(
     #     model_path=MODEL_PATH,
     #     tokenizer_path=MODEL_PATH
     # )
