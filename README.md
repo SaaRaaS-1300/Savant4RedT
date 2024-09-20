@@ -65,6 +65,13 @@ python start.py
 
 + **✨ 感谢 `Intel` 官方提供框架、算力等技术支持 ✨**
 
+### Members
+
+<a href="https://github.com/SaaRaaS-1300/Savant4RedT/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=SaaRaaS-1300/Savant4RedT" />
+</a>
+
+
 ---
 
 ![pic](docs/img/image_4.png)
