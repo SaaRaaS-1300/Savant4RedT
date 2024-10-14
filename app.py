@@ -37,8 +37,8 @@ def side_board_B():
     )
 
     board_2 = st.Page(
-        "demonstration/det4img.py",
-        title="Detector4Img",
+        "demonstration/det4img_internvl2.py",
+        title="Detector4Img by InternVL2",
         icon="🍂"
     )
 
