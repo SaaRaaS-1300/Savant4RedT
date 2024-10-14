@@ -233,7 +233,7 @@ def generate_markdown():
                 # 安全等级划分：[低]危险等级
                 level = content.split('安全等级划分：[')[1].split(']')[0]
                 if level == '高':
-                    image_url = 'https://github.com/user-attachments/assets/95c2a0b7-812a-4992-a1cc-3e8201f06c5e'
+                    image_url = 'https://github.com/user-attachments/assets/33e79fc9-0cf9-40f9-b60c-56f6bc818d80'
     markdown_content = markdown_content.format(image_url=image_url)
     return markdown_content
 
