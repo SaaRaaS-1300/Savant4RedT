@@ -1,4 +1,3 @@
-import io
 import copy
 import warnings
 from dataclasses import asdict, dataclass
@@ -6,7 +5,6 @@ from typing import Callable, List, Optional
 import streamlit as st
 import torch
 from torch import nn
-import transformers
 from transformers.generation.utils import (LogitsProcessorList,
                                            StoppingCriteriaList)
 from transformers.utils import logging
@@ -322,5 +320,5 @@ def main():
             mime="text/markdown"
         )
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
