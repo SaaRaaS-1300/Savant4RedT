@@ -1,3 +1,5 @@
+import base64
+import io
 from dataclasses import asdict, dataclass
 from typing import List, Optional
 
@@ -213,11 +215,24 @@ def generate_markdown():
         role = message['role']
         content = message['content']
         if role == 'user':
-            markdown_content += f"**User:** {content}\n\n"
-            if i == 0:
-                markdown_content += f'![image]({image})\n\n'
+            markdown_content += f"**User:**\n\n{content}\n\n"
+            if i == 0 and image:
+                image = Image.open(image).convert('RGB')
+                width, height = image.size
+                ratio = 256 / max(width, height)
+                image = image.resize((int(width * ratio), int(height * ratio)))
+                image_data = io.BytesIO()
+                image.save(image_data, format='PNG')
+                base64_string = base64.b64encode(image_data.getvalue()).decode('utf-8')
+                markdown_content += f'<img src="data:image/png;base64,{base64_string}"/>\n\n'
         elif role == 'robot':
-            markdown_content += f"**Robot:** {content}\n\n"
+            markdown_content += f"**Robot:**\n\n{content}\n\n"
+            if '安全等级划分' in content:
+                # 安全等级划分：[低]危险等级
+                level = content.split('安全等级划分：[')[1].split(']')[0]
+                if level == '高':
+                    markdown_content = markdown_content.replace('<img', '<!--\n<img')
+                    markdown_content = markdown_content.replace('/>', '/>\n-->')
     return markdown_content
 
 
