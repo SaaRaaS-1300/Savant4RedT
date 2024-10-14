@@ -31,7 +31,7 @@ pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https
 pip install ipex-llm==2.1.0b20240805
 pip install transformers==4.37.0
 pip install accelerate==0.33.0
-pip install streamlit==1.38.0
+pip install streamlit==1.39.0
 pip install einops==0.8.0
 pip install sentencepiece==0.2.0
 pip install py-cpuinfo==9.0.0
@@ -49,6 +49,10 @@ python start.py
 
 ## Acknowledgement
 
+![pic](docs/img/image_1.png)
+
+---
+
 ### 🏆 荣誉墙
 
 + **🎖️ [2024-08-11] 进入 `Intel LLM Hackathon` 挑战赛 `50` 强 (50/1618) 🎖️**
@@ -61,12 +65,12 @@ python start.py
 
 + **✨ 感谢 `Intel` 官方提供框架、算力等技术支持 ✨**
 
-### Members
+### 💫 Members
 
 <a href="https://github.com/SaaRaaS-1300/Savant4RedT/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=SaaRaaS-1300/Savant4RedT" />
 </a>
 
-![pic](docs/img/image_1.png)
+---
 
 ![pic](docs/img/image_4.png)
