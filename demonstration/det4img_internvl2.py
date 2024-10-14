@@ -210,29 +210,31 @@ def modify_system_message(model):
 def generate_markdown():
     messages = st.session_state.internvl2_messages
     image = st.session_state.internvl2_image
+    image_url = ''
     markdown_content = ""
     for i, message in enumerate(messages):
         role = message['role']
-        content = message['content']
+        content = message['content'].replace('<', '\<').replace('>', '\>')
         if role == 'user':
             markdown_content += f"**User:**\n\n{content}\n\n"
             if i == 0 and image:
                 image = Image.open(image).convert('RGB')
                 width, height = image.size
-                ratio = 256 / max(width, height)
+                ratio = 448 / max(width, height)
                 image = image.resize((int(width * ratio), int(height * ratio)))
                 image_data = io.BytesIO()
                 image.save(image_data, format='PNG')
                 base64_string = base64.b64encode(image_data.getvalue()).decode('utf-8')
-                markdown_content += f'<img src="data:image/png;base64,{base64_string}"/>\n\n'
+                image_url = f'data:image/png;base64,{base64_string}'
+                markdown_content += '<center>\n<img src="{image_url}">\n</center>\n\n'
         elif role == 'robot':
             markdown_content += f"**Robot:**\n\n{content}\n\n"
             if '安全等级划分' in content:
                 # 安全等级划分：[低]危险等级
                 level = content.split('安全等级划分：[')[1].split(']')[0]
                 if level == '高':
-                    markdown_content = markdown_content.replace('<img', '<!--\n<img')
-                    markdown_content = markdown_content.replace('/>', '/>\n-->')
+                    image_url = 'https://github.com/user-attachments/assets/95c2a0b7-812a-4992-a1cc-3e8201f06c5e'
+    markdown_content = markdown_content.format(image_url=image_url)
     return markdown_content
 
 
