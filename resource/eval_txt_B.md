@@ -1,11 +1,11 @@
-### Multimodal
+### Vision
 
 <center>
 <table align="center" style="width:100%; border:#000 solid; border-width:1px 0">
 <thead style="border-bottom:#000 1px solid;">
     <tr>
         <th style="border:0; text-align:center;"></th>
-        <th style="border:0; text-align:center;">Savant4RedT-2B-Multimodal</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1-Report-2B</th>
         <th style="border:0; text-align:center;">-</th>
         <th style="border:0; text-align:center;">-</th>
     </tr>
