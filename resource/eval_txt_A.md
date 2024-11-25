@@ -6,9 +6,9 @@
 <thead style="border-bottom:#000 1px solid;">
     <tr>
         <th style="border:0; text-align:center;"></th>
-        <th style="border:0; text-align:center;">Savant4RedT-v1-1.8B-Report</th>
-        <th style="border:0; text-align:center;">Savant4RedT-v1-1.5B-Report</th>
-        <th style="border:0; text-align:center;">Savant4RedT-v1-7B-Report</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1-Report-1.8B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1-Report-1.5B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1-Report-7B</th>
     </tr>
     <tr>
         <td style="border:0; text-align:center;">基模型</td>
