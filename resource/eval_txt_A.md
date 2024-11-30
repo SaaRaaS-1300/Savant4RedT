@@ -30,3 +30,45 @@
     </tr>
 </table>
 </center>
+
+<center>
+<table align="center" style="width:100%; border:#000 solid; border-width:1px 0">
+<thead style="border-bottom:#000 1px solid;">
+    <tr>
+        <th style="border:0; text-align:center;"></th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Level-1.5B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Level-3B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Level-7B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Report-1.5B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Report-3B</th>
+        <th style="border:0; text-align:center;">Savant4RedT-v1.5-Report-7B</th>
+    </tr>
+    <tr>
+        <td style="border:0; text-align:center;">基模型</td>
+        <td style="border:0; text-align:center;">Qwen2.5-1.5B-Instruct</td>
+        <td style="border:0; text-align:center;">Qwen2.5-3B-Instruct</td>
+        <td style="border:0; text-align:center;">Qwen2.5-7B-Instruct</td>
+        <td style="border:0; text-align:center;">Qwen2.5-1.5B-Instruct</td>
+        <td style="border:0; text-align:center;">Qwen2.5-3B-Instruct</td>
+        <td style="border:0; text-align:center;">Qwen2.5-7B-Instruct</td>
+    </tr>
+    <tr>
+        <td style="border:0; text-align:center;">Accuracy</td>
+        <td style="border:0; text-align:center;">89.97%</td>
+        <td style="border:0; text-align:center;">-</td>
+        <td style="border:0; text-align:center;">-</td>
+        <td style="border:0; text-align:center;">81.44%</td>
+        <td style="border:0; text-align:center;">85.88%</td>
+        <td style="border:0; text-align:center;">91.62%</td>
+    </tr>
+    <tr>
+        <td style="border:0; text-align:center;">Recall</td>
+        <td style="border:0; text-align:center;">92.02%</td>
+        <td style="border:0; text-align:center;">-</td>
+        <td style="border:0; text-align:center;">-</td>
+        <td style="border:0; text-align:center;">90.80%</td>
+        <td style="border:0; text-align:center;">93.78%</td>
+        <td style="border:0; text-align:center;">96.42%</td>
+    </tr>
+</table>
+</center>
