@@ -283,7 +283,7 @@ def main():
     judger, rewriter, tokenizer = load_model()
     print('load models end.')
 
-    st.title('🛡️ Savant4RedT && 内容安全测试')
+    st.title('🛡️ Savant4RedT-v2 Judger & Rewriter')
     st.sidebar.markdown('## 🍏 Model Configuration')
 
     generation_config = prepare_generation_config()
