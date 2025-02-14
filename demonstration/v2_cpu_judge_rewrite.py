@@ -45,7 +45,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-MODEL_PATH = "models/Qwen2.5-3B-Instruct"
+# MODEL_PATH = "models/Qwen2.5-3B-Instruct"
 JUDGER_PATH = "models/Savant4RedT-v2-Judger-3B"
 REWRITER_PATH = "models/Savant4RedT-v2-Rewriter-3B"
 USER_AVATAR = 'resource/demo_pic/pic_user.png'
@@ -206,7 +206,7 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(JUDGER_PATH, trust_remote_code=True)
     judger = AutoModelForCausalLM.from_pretrained(JUDGER_PATH, trust_remote_code=True, load_in_4bit=True)
     rewriter = AutoModelForCausalLM.from_pretrained(REWRITER_PATH, trust_remote_code=True, load_in_4bit=True)
     return judger, rewriter, tokenizer
