@@ -46,8 +46,8 @@ st.markdown(
 )
 
 MODEL_PATH = "models/Qwen2.5-3B-Instruct"
-JUDGER_ADAPTER_PATH = "models/Savant4RedT-v2-Judger-3B-Adapter"
-REWRITER_ADAPTER_PATH = "models/Savant4RedT-v2-Rewriter-3B-Adapter"
+JUDGER_PATH = "models/Savant4RedT-v2-Judger-3B"
+REWRITER_PATH = "models/Savant4RedT-v2-Rewriter-3B"
 USER_AVATAR = 'resource/demo_pic/pic_user.png'
 ROBOT_AVATAR = 'resource/demo_pic/pic_bot.png'
 logger = logging.get_logger(__name__)
@@ -206,14 +206,10 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
-    model = (AutoModelForCausalLM.from_pretrained(
-        MODEL_PATH,
-        trust_remote_code=True, load_in_4bit=True))
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH,
-                                              trust_remote_code=True)
-    # model = PeftModel.from_pretrained(model, JUDGER_ADAPTER_PATH, adapter_name='judger')
-    # model.load_adapter(REWRITER_ADAPTER_PATH, adapter_name='rewriter')
-    return model, tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+    judger = AutoModelForCausalLM.from_pretrained(JUDGER_PATH, trust_remote_code=True, load_in_4bit=True)
+    rewriter = AutoModelForCausalLM.from_pretrained(REWRITER_PATH, trust_remote_code=True, load_in_4bit=True)
+    return judger, rewriter, tokenizer
 
 
 def prepare_generation_config():
@@ -284,7 +280,7 @@ rewriter_prompt = """你是一个理性的文本优化专家，能够根据评�
 
 def main():
     print('load models begin.')
-    model, tokenizer = load_model()
+    judger, rewriter, tokenizer = load_model()
     print('load models end.')
 
     st.title('🛡️ Savant4RedT && 内容安全测试')
@@ -324,11 +320,10 @@ def main():
             'avatar': USER_AVATAR
         })
 
-        # model.set_adapter('judger')
         with st.chat_message('robot', avatar=ROBOT_AVATAR):
             message_placeholder = st.empty()
             for cur_response in generate_interactive(
-                    model=model,
+                    model=judger,
                     tokenizer=tokenizer,
                     prompt=real_judger_input,
                     additional_eos_token_id=151643,
@@ -357,11 +352,10 @@ def main():
             'avatar': USER_AVATAR
         })
 
-        # model.set_adapter('rewriter')
         with st.chat_message('robot', avatar=ROBOT_AVATAR):
             message_placeholder = st.empty()
             for cur_response in generate_interactive(
-                    model=model,
+                    model=rewriter,
                     tokenizer=tokenizer,
                     prompt=real_rewriter_input,
                     additional_eos_token_id=151643,
