@@ -195,7 +195,7 @@ def generate_interactive(
 
 
 def on_btn_click():
-    del st.session_state.sec2_messages
+    del st.session_state.v1_cpu_messages
 
 
 @st.cache_resource
@@ -232,7 +232,7 @@ cur_query_prompt = '<|im_start|>user\n{user}<|im_end|>\n\
 
 
 def combine_history(prompt):
-    messages = st.session_state.sec2_messages
+    messages = st.session_state.v1_cpu_messages
     meta_instruction = "你是 AI 信息内容安全专家"
     total_prompt = f'<s><|im_start|>system\n{meta_instruction}<|im_end|>\n'
     for message in messages:
@@ -249,7 +249,7 @@ def combine_history(prompt):
 
 
 def generate_markdown():
-    messages = st.session_state.sec2_messages
+    messages = st.session_state.v1_cpu_messages
     markdown_content = ""
     for message in messages:
         role = message['role']
@@ -277,11 +277,11 @@ def main():
     generation_config = prepare_generation_config()
 
     # Initialize chat history
-    if 'sec2_messages' not in st.session_state:
-        st.session_state.sec2_messages = []
+    if 'v1_cpu_messages' not in st.session_state:
+        st.session_state.v1_cpu_messages = []
 
     # Display chat messages from history on app rerun
-    for message in st.session_state.sec2_messages:
+    for message in st.session_state.v1_cpu_messages:
         with st.chat_message(message['role'], avatar=message.get('avatar')):
             st.markdown(message['content'])
 
@@ -293,7 +293,7 @@ def main():
             st.markdown(prompt)
         real_prompt = combine_history(prompt)
         # Add user message to chat history
-        st.session_state.sec2_messages.append({
+        st.session_state.v1_cpu_messages.append({
             'role': 'user',
             'content': prompt,
             'avatar': USER_AVATAR
@@ -312,14 +312,14 @@ def main():
                 message_placeholder.markdown(cur_response + '▌')
             message_placeholder.markdown(cur_response)
         # Add robot response to chat history
-        st.session_state.sec2_messages.append({
+        st.session_state.v1_cpu_messages.append({
             'role': 'robot',
             'content': cur_response,  # pylint: disable=undefined-loop-variable
             'avatar': ROBOT_AVATAR,
         })
 
     # Generate and provide download link for markdown file
-    if st.session_state.sec2_messages:
+    if st.session_state.v1_cpu_messages:
         markdown_content = generate_markdown()
         st.download_button(
             label="🐬 Download the Analyzing Result as Markdown Files 🐬",

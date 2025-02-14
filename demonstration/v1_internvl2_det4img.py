@@ -171,8 +171,8 @@ def generate_interactive(
 
 
 def on_btn_click():
-    del st.session_state.internvl2_messages
-    del st.session_state.internvl2_image
+    del st.session_state.v1_internvl2_messages
+    del st.session_state.v1_internvl2_image
 
 
 @st.cache_resource
@@ -193,7 +193,7 @@ def prepare_generation_config():
                                value=8192)
         top_p = st.slider('Top P', 0.0, 1.0, 0.6, step=0.01)
         temperature = st.slider('Temperature', 0.0, 1.0, 0.6, step=0.01)
-        st.file_uploader('Upload Image', type=['jpg', 'jpeg', 'png'], key='internvl2_image')
+        st.file_uploader('Upload Image', type=['jpg', 'jpeg', 'png'], key='v1_internvl2_image')
         st.button('Clear Chat History', on_click=on_btn_click)
 
     generation_config = GenerationConfig(max_length=max_length,
@@ -208,8 +208,8 @@ def modify_system_message(model):
 
 
 def generate_markdown():
-    messages = st.session_state.internvl2_messages
-    image = st.session_state.internvl2_image
+    messages = st.session_state.v1_internvl2_messages
+    image = st.session_state.v1_internvl2_image
     image_url = ''
     markdown_content = ""
     for i, message in enumerate(messages):
@@ -250,17 +250,17 @@ def main():
     generation_config = prepare_generation_config()
     
     # Initialize chat history
-    if 'internvl2_messages' not in st.session_state:
-        st.session_state.internvl2_messages = []
-    if 'internvl2_image' not in st.session_state:
-        st.session_state.internvl2_image = None
+    if 'v1_internvl2_messages' not in st.session_state:
+        st.session_state.v1_internvl2_messages = []
+    if 'v1_internvl2_image' not in st.session_state:
+        st.session_state.v1_internvl2_image = None
     
     # Display image from history on app rerun
-    if st.session_state.internvl2_image:
-        st.image(st.session_state.internvl2_image)
+    if st.session_state.v1_internvl2_image:
+        st.image(st.session_state.v1_internvl2_image)
     
     # Display chat messages from history on app rerun
-    for message in st.session_state.internvl2_messages:
+    for message in st.session_state.v1_internvl2_messages:
         with st.chat_message(message['role'], avatar=message.get('avatar')):
             st.markdown(message['content'])
     
@@ -271,7 +271,7 @@ def main():
             prompt = f'请你分析以上图片：\n<image>'
             st.markdown(prompt)
         # Add user message to chat history
-        st.session_state.internvl2_messages.append({
+        st.session_state.v1_internvl2_messages.append({
             'role': 'user',
             'content': prompt,
             'avatar': USER_AVATAR
@@ -283,22 +283,22 @@ def main():
                     model=model,
                     tokenizer=tokenizer,
                     prompt=prompt,
-                    history=st.session_state.internvl2_messages[:-1],
-                    image=st.session_state.internvl2_image,
+                    history=st.session_state.v1_internvl2_messages[:-1],
+                    image=st.session_state.v1_internvl2_image,
                     generation_config=generation_config,
             ):
                 # Display robot response in chat message container
                 message_placeholder.markdown(cur_response + '▌')
             message_placeholder.markdown(cur_response)
         # Add robot response to chat history
-        st.session_state.internvl2_messages.append({
+        st.session_state.v1_internvl2_messages.append({
             'role': 'robot',
             'content': cur_response,  # pylint: disable=undefined-loop-variable
             'avatar': ROBOT_AVATAR,
         })
     
     # Generate and provide download link for markdown file
-    if st.session_state.internvl2_messages:
+    if st.session_state.v1_internvl2_messages:
         markdown_content = generate_markdown()
         st.download_button(
             label="🐬 Download the Analyzing Result as Markdown Files 🐬",
