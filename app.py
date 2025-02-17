@@ -25,14 +25,14 @@ def monitor_cpu_gpu():
     cpu_name = cpuinfo.get_cpu_info()["brand_raw"]
     cpu_utilization = psutil.cpu_percent(interval=1)
     cpu_memory = psutil.virtual_memory()
-    cpu_memory_used = round(cpu_memory.used / 1024 ** 3, 2)
-    cpu_memory_total = round(cpu_memory.total / 1024 ** 3, 2)
+    cpu_memory_used = f"{round(cpu_memory.used / 1024 ** 3, 2)} GB"
+    cpu_memory_total = f"{round(cpu_memory.total / 1024 ** 3, 2)} GB"
     # render
     st.sidebar.markdown("### System Monitor")
     info = '| Devices | Utilization | Memory (Used) |\n| --- | --- | --- |\n'
-    info += f"| {cpu_name} | {cpu_utilization}% | {cpu_memory_used}/{cpu_memory_total} GB |\n"
+    info += f"| {cpu_name} | {cpu_utilization}% | {cpu_memory_used}/{cpu_memory_total} |\n"
     for i in range(gpu_devices):
-        info += f"| {gpu_names[i]} | {utilization[i]}% | {memory_used[i]}/{memory_total[i]} GB |\n"
+        info += f"| {gpu_names[i]} | {utilization[i]}% | {memory_used[i]}/{memory_total[i]} |\n"
     st.sidebar.markdown(info)
 
 

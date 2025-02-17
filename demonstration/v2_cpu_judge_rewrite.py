@@ -1,4 +1,4 @@
-import io
+import json
 import copy
 import warnings
 from dataclasses import asdict, dataclass
@@ -252,6 +252,22 @@ def combine_history(prompt, messages):
     return total_prompt
 
 
+def process_pred(response):
+    begin_index = 0
+    while True:
+        reason_index = response.find('"reason": "', begin_index)
+        if reason_index == -1:
+            break
+        brace_index = response.find('}', reason_index)
+        reason = response[reason_index + 11: brace_index].strip()[:-1]
+        if '"' in reason:
+            reason = reason.replace('\\\"', '"')
+            response = response.replace(reason, reason.replace('"', '\\\"'))
+        # update
+        begin_index = brace_index
+    return json.loads(response)
+
+
 judger_prompt = """你是一个公正的评判助手，能够根据要求给出对应维度的分数。需要进行检测的文本内容：
 
 ```
@@ -279,9 +295,16 @@ rewriter_prompt = """你是一个理性的文本优化专家，能够根据评�
 
 
 def main():
+    if 'rerun_count' not in st.session_state:
+        st.session_state.rerun_count = 0
+
     print('load models begin.')
     judger, rewriter, tokenizer = load_model()
     print('load models end.')
+
+    if st.session_state.rerun_count == 0:
+        st.session_state.rerun_count = 1
+        st.rerun()
 
     st.title('🛡️ Savant4RedT-v2 Judger & Rewriter')
     st.sidebar.markdown('## 🍏 Model Configuration')
@@ -344,36 +367,37 @@ def main():
             'avatar': ROBOT_AVATAR
         })
 
-        real_rewriter_prompt = rewriter_prompt.format(scores=cur_response, target=prompt)
-        real_rewriter_input = combine_history(real_rewriter_prompt, st.session_state.v2_cpu_rewriter_messages)
-        st.session_state.v2_cpu_rewriter_messages.append({
-            'role': 'user',
-            'content': real_rewriter_prompt,
-            'avatar': USER_AVATAR
-        })
+        if process_pred(cur_response)['toxic']['value'] > 5:
+            real_rewriter_prompt = rewriter_prompt.format(scores=cur_response, target=prompt)
+            real_rewriter_input = combine_history(real_rewriter_prompt, st.session_state.v2_cpu_rewriter_messages)
+            st.session_state.v2_cpu_rewriter_messages.append({
+                'role': 'user',
+                'content': real_rewriter_prompt,
+                'avatar': USER_AVATAR
+            })
 
-        with st.chat_message('robot', avatar=ROBOT_AVATAR):
-            message_placeholder = st.empty()
-            for cur_response in generate_interactive(
-                    model=rewriter,
-                    tokenizer=tokenizer,
-                    prompt=real_rewriter_input,
-                    additional_eos_token_id=151643,
-                    **asdict(generation_config),
-            ):
-                # Display robot response in chat message container
-                message_placeholder.markdown(cur_response + '▌')
-            message_placeholder.markdown(cur_response)
-        st.session_state.v2_cpu_messages.append({
-            'role': 'robot',
-            'content': cur_response,
-            'avatar': ROBOT_AVATAR,
-        })
-        st.session_state.v2_cpu_rewriter_messages.append({
-            'role': 'robot',
-            'content': cur_response,
-            'avatar': ROBOT_AVATAR
-        })
+            with st.chat_message('robot', avatar=ROBOT_AVATAR):
+                message_placeholder = st.empty()
+                for cur_response in generate_interactive(
+                        model=rewriter,
+                        tokenizer=tokenizer,
+                        prompt=real_rewriter_input,
+                        additional_eos_token_id=151643,
+                        **asdict(generation_config),
+                ):
+                    # Display robot response in chat message container
+                    message_placeholder.markdown(cur_response + '▌')
+                message_placeholder.markdown(cur_response)
+            st.session_state.v2_cpu_messages.append({
+                'role': 'robot',
+                'content': cur_response,
+                'avatar': ROBOT_AVATAR,
+            })
+            st.session_state.v2_cpu_rewriter_messages.append({
+                'role': 'robot',
+                'content': cur_response,
+                'avatar': ROBOT_AVATAR
+            })
 
 
 main()
