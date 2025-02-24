@@ -16,13 +16,34 @@
 
 ## Quick Start
 
-### 下载模型权重
+### v2
+
+#### 下载模型权重
+
+请将模型权重下载到 `models` 文件夹下 (创建文件夹即可)，即 `models/Savant4RedT-v2-Judger-3B` 和 `models/Savant4RedT-v2-Rewriter-3B`。
+
+模型权重链接为 [Judger](https://www.modelscope.cn/models/fanqiNO1/Savant4RedT-v2-Judger-3B) 和 [Rewriter](https://www.modelscope.cn/models/fanqiNO1/Savant4RedT-v2-Rewriter-3B)。
+
+#### 网页体验
+
+对于网页体验 `Demo`，可以尝试执行以下命令：
+
+```bash
+python play.py
+```
+
+### v1
+
+<details>
+<summary>v1 详细信息</summary>
+
+#### 下载模型权重
 
 请将模型权重下载到 `models` 文件夹下 (创建文件夹即可)，即 `models/Savant4RedT-1_8B-Content`。
 
 模型权重链接为 [Link](https://www.modelscope.cn/models/SaaRaaS/Savant4RedT-1_8B-Content) 。
 
-### 安装依赖
+#### 安装依赖
 
 所用 python 版本为 3.11。
 
@@ -37,7 +58,7 @@ pip install sentencepiece==0.2.0
 pip install py-cpuinfo==9.0.0
 ```
 
-### 网页体验
+#### 网页体验
 
 对于网页体验 `Demo`，可以尝试执行 `python` 文件 `start.py`
 
@@ -46,6 +67,8 @@ python start.py
 ```
 
 对于其他细节内容，请访问 `quick_start.md` 文件，其链接为 [Link](docs/quick_start.md)
+
+</details>
 
 ## Acknowledgement
 
